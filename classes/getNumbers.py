@@ -46,7 +46,7 @@ class GetNumbers:
                     'div.kt-textfield input').send_keys(user_phone_number)
                 # Request the phone number verification code from the user
                 user_verify_code = input(
-                    'Please enter the verification code').strip()
+                    'Please enter the verification code: ').strip()
                 # Send the phone number verification code to the input
                 self.__driver.find_element_by_css_selector(
                     'article.auth-modal div.kt-modal__contents input').send_keys(user_verify_code)
