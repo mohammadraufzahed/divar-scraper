@@ -7,19 +7,19 @@ from url_normalize import url_normalize
 class GetPosterLink:
     def __init__(self, timeout):
         # Initial the browser
-        self.driver = webdriver.Firefox()
-        self.category_link = input("Input the category link: ")
-        self.driver.get(self.category_link)
+        self.__driver = webdriver.Firefox()
+        self.__category_link = input("Input the category link: ")
+        self.__driver.get(self.__category_link)
         #  Initial the list of links
-        self.links = list()
+        self.__links = list()
         # Initial the timeout time
-        self.timeout = timeout
+        self.__timeout = timeout
 
     def scrapData(self):
         # Store the pause time
-        scroll_pause_time = self.timeout
+        scroll_pause_time = self.__timeout
         # Select the posters box
-        posters_box_container = self.driver.find_element_by_css_selector(
+        posters_box_container = self.__driver.find_element_by_css_selector(
             'div.browse-post-list')
         # Initial the now and last style of posters box to detect the page changes
         style_last = ''
@@ -41,11 +41,11 @@ class GetPosterLink:
                 # Grab the poster link and normalize it
                 link = url_normalize(poster.get_attribute('href'))
                 # Check the link that exists in the links list
-                if link not in self.links:
+                if link not in self.__links:
                     # If it doesn't exist, append it to the list
-                    self.links.append(link)
+                    self.__links.append(link)
             # Scroll the page
-            self.driver.execute_script(
+            self.__driver.execute_script(
                 "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}"+");")
             # Increase the scroll_height variable
             scroll_height += 3104.5
@@ -54,8 +54,8 @@ class GetPosterLink:
             # Refresh the styles
             style_last = style_now
             style_now = posters_box_container.get_attribute("style")
-        print(f'Scraped {len(self.links)} Links')
-        self.driver.quit()
+        print(f'Scraped {len(self.__links)} Links')
+        self.__driver.quit()
 
     # Save the links in file
     def saveLinks(self):
@@ -64,5 +64,5 @@ class GetPosterLink:
             # Clean it
             f.write('')
             # Append the new JSON to the file
-            json.dump(self.links, f, ensure_ascii=False)
+            json.dump(self.__links, f, ensure_ascii=False)
         print("Links saved on links.json")
