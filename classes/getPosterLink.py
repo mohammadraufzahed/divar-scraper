@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 import time
 import json
 from url_normalize import url_normalize
