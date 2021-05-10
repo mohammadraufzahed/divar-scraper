@@ -1,4 +1,3 @@
-import time
 from classes.getPosterLink import GetPosterLink
 
 if __name__ == "__main__":
