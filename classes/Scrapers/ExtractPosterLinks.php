@@ -10,6 +10,9 @@ use URL\Normalizer;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Extract the posters link
+ */
 class ExtractPosterLinks
 {
     private object $driver;
