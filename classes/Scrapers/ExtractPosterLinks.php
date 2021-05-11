@@ -26,7 +26,7 @@ class ExtractPosterLinks
         $this->driver = FirefoxDriver::start();
         // Take the category URL from the user 
         echo "Enter the category link: ";
-        $this->categoryLink = rtrim(fgets(STDIN));
+        $this->categoryLink = trim(fgets(STDIN));
         // Load the category URL
         try {
             $this->driver->get($this->categoryLink);
