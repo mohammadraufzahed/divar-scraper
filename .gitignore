@@ -223,7 +223,6 @@ pytestdebug.log
 # Translations
 *.mo
 *.pot
-*.json
 # Django stuff:
 *.log
 local_settings.py
@@ -750,4 +749,7 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 *.tlog
 
-# End of https://www.toptal.com/developers/gitignore/api/gitbook,visualstudiocode,visualstudio,sublimetext,python,pycharm,linux,windows,macos
+### Composer ###
+composer.phar
+/vendor/
+# End of https://www.toptal.com/developers/gitignore/api/gitbook,visualstudiocode,visualstudio,sublimetext,python,pycharm,linux,windows,macos/vendor/

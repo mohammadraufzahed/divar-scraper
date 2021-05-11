@@ -2,11 +2,13 @@
 
 namespace DivarScraper\Scrapers;
 
+use Facebook\WebDriver\Exception\UnknownErrorException;
+use Facebook\WebDriver\Exception\WebDriverCurlException;
 use Facebook\WebDriver\Firefox\FirefoxDriver;
 use Facebook\WebDriver\WebDriverBy;
 use URL\Normalizer;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 class ExtractPosterLinks
 {
@@ -15,7 +17,7 @@ class ExtractPosterLinks
     private array $links = array();
     private int $timeout;
 
-    public function __construct(int $timeout)
+    public function __construct(int $scrollTimeout, int $pageLoadTimeout)
     {
         // Initial the web browser
         $this->driver = FirefoxDriver::start();
@@ -23,11 +25,15 @@ class ExtractPosterLinks
         echo "Enter the category link: ";
         $this->categoryLink = rtrim(fgets(STDIN));
         // Load the category URL
-        $this->driver->get($this->categoryLink);
+        try {
+            $this->driver->get($this->categoryLink);
+        } catch (WebDriverCurlException $e) {
+            print("Category link dosent load");
+        }
         // 
-        $this->driver->manage()->timeouts()->implicitlyWait(10);
+        $this->driver->manage()->timeouts()->implicitlyWait((empty($pageLoadTimeout)) ? 10 : $pageLoadTimeout);
         // Assign the number to the timeout variable
-        $this->timeout = $timeout;
+        $this->timeout = (empty($scrollTimeout)) ? 3 : $scrollTimeout;
     }
 
     /***
@@ -74,6 +80,7 @@ class ExtractPosterLinks
         // Echo how many links scraped
         $linksLength = sizeof($this->links);
         echo ("Scraped $linksLength Links\n");
+        // Terminate the browser
         $this->driver->quit();
     }
     /**
@@ -86,7 +93,3 @@ class ExtractPosterLinks
         return $this->links;
     }
 }
-
-$extractPosterLink = new ExtractPosterLinks(4);
-$links = $extractPosterLink->getLinks();
-var_dump($links);
