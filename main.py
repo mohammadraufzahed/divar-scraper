@@ -1,5 +1,5 @@
 from classes.getPosterLink import GetPosterLink
-from classes.getNumbers import GetNumbers
+from classes.extractData import ExtractData
 
 if __name__ == "__main__":
     # Create instance of GetPosterLink
@@ -9,6 +9,6 @@ if __name__ == "__main__":
     # Save the scraped links
     get_poster_links.saveLinks()
     # Create instance of GetNumbers
-    get_numbers = GetNumbers()
+    get_numbers = ExtractData()
     # Start the phone number scraper
-    get_numbers.extract_phone_numbers()
+    get_numbers.extract_data()
