@@ -7,7 +7,8 @@ from url_normalize import url_normalize
 class GetPosterLink:
     def __init__(self, timeout):
         # Initial the browser
-        self.__driver = webdriver.Firefox(executable_path='C:\\webdrivers\\geckodriver')
+        self.__driver = webdriver.Firefox(
+            executable_path='C:\\webdrivers\\geckodriver')
         self.__category_link = input("Input the category link: ")
         self.__driver.get(self.__category_link)
         #  Initial the list of links
@@ -45,9 +46,8 @@ class GetPosterLink:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
             # Scroll the page
-            self.__driver.execute_script(
-                "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}"+");")
-            # Increase the scroll_height variable
+            self.__scrollPage()
+           # Increase the scroll_height variable
             scroll_height += 3104.5
             # Make the app goes to sleep
             time.sleep(scroll_pause_time)
@@ -58,7 +58,7 @@ class GetPosterLink:
         self.__driver.quit()
 
     # Save the links in file
-    def save_links(self):
+    def save_links(self: object):
         # Open the links.json file
         with open('links.json', 'w+', encoding='utf8') as f:
             # Clean it
@@ -66,3 +66,8 @@ class GetPosterLink:
             # Append the new JSON to the file
             json.dump(self.__links, f, ensure_ascii=False)
         print("Links saved on links.json")
+
+    # Scroll the page
+    def __scrollPage(self: object, scroll_height: int):
+        self.__driver.execute_script(
+            "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}"+");")
