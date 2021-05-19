@@ -46,7 +46,7 @@ class GetPosterLink:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
             # Scroll the page
-            self.__scrollPage()
+            self.__scrollPage(scroll_height)
            # Increase the scroll_height variable
             scroll_height += 3104.5
             # Make the app goes to sleep
