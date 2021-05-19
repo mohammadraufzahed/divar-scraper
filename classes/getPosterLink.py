@@ -7,7 +7,7 @@ from url_normalize import url_normalize
 class GetPosterLink:
     def __init__(self, timeout):
         # Initial the browser
-        self.__driver = webdriver.Firefox()
+        self.__driver = webdriver.Firefox(executable_path='C:\\webdrivers\\geckodriver')
         self.__category_link = input("Input the category link: ")
         self.__driver.get(self.__category_link)
         #  Initial the list of links
@@ -15,7 +15,7 @@ class GetPosterLink:
         # Initial the timeout time
         self.__timeout = timeout
 
-    def scrapData(self):
+    def scrap_data(self):
         # Store the pause time
         scroll_pause_time = self.__timeout
         # Select the posters box
@@ -58,7 +58,7 @@ class GetPosterLink:
         self.__driver.quit()
 
     # Save the links in file
-    def saveLinks(self):
+    def save_links(self):
         # Open the links.json file
         with open('links.json', 'w+', encoding='utf8') as f:
             # Clean it

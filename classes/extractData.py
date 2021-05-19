@@ -10,7 +10,7 @@ class ExtractData:
     def __init__(self):
         # Initial the variables
         self.__links = list()
-        self.__driver = webdriver.Firefox()
+        self.__driver = webdriver.Firefox(executable_path='C:\\webdrivers\\geckodriver')
         self.__counter = 0
         self.__data_list = list()
         # Extract the links
