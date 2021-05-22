@@ -1,5 +1,5 @@
 from selenium import webdriver
-import time
+from time import sleep
 import json
 from url_normalize import url_normalize
 
@@ -50,15 +50,16 @@ class GetPosterLink:
            # Increase the scroll_height variable
             scroll_height += 3104.5
             # Make the app goes to sleep
-            time.sleep(scroll_pause_time)
+            sleep(scroll_pause_time)
             # Refresh the styles
             style_last = style_now
             style_now = posters_box_container.get_attribute("style")
         print(f'Scraped {len(self.__links)} Links')
+        self.__save_links()
         self.__driver.quit()
 
     # Save the links in file
-    def save_links(self: object):
+    def __save_links(self: object):
         # Open the links.json file
         with open('links.json', 'w+', encoding='utf8') as f:
             # Clean it
