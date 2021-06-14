@@ -4,6 +4,8 @@ from time import sleep
 from unidecode import unidecode
 import json
 from colorama import Fore
+import psycopg2
+import config
 
 
 class ExtractData:
@@ -40,15 +42,31 @@ class ExtractData:
             else:
                 self.__poster_extract(link)
         self.__driver.quit()
-        print('Information saved in data.json')
         self.__save_data()
+        print("Data saved on the database")
 
     # Save the data in the json file
     def __save_data(self: object) -> None:
-        # Open the json file
-        with open('data.json', 'w+', encoding='utf8') as f:
-            # Append the json to file
-            json.dump(self.__data_list, f, ensure_ascii=False)
+        conn = psycopg2.connect(
+            host=config.DB_HOST,
+            user=config.DB_USER,
+            password=config.DB_PASSWORD,
+            dbname=config.DB_NAME
+        )
+        curs = conn.cursor()
+        for data in self.__data_list:
+            try:
+                sql = f"""
+                INSERT INTO information(title, description, phone, tags)
+                VALUES ('{data['postTitle']}', '{data['posterDiscription']}', '{data['posterPhone']}', '{data['postTags']}')
+                """
+                curs.execute(sql)
+            except Exception:
+                pass
+
+        conn.commit()
+        curs.close()
+        conn.close()
 
     # Extract first poster with login
     def __first_poster_extract(self: object, link: str) -> None:
@@ -101,7 +119,7 @@ class ExtractData:
                 'postTitle': post_title,
                 'posterDiscription': discription,
                 'posterPhone': phone_number,
-                'postTags': tags
+                'postTags': ' '.join(tags)
             })
             # Increase the counter by one
             self.__counter += 1
@@ -143,7 +161,7 @@ class ExtractData:
                 'postTitle': post_title,
                 'posterDiscription': discription,
                 'posterPhone': phone_number,
-                'postTags': tags
+                'postTags': ' '.join(tags)
             })
         except NoSuchElementException:
             print(f'{Fore.RED}ELement does not exists{Fore.WHITE}')
