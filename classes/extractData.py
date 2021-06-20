@@ -5,12 +5,13 @@ from unidecode import unidecode
 import json
 from colorama import Fore
 import psycopg2
-import config
 
 
 class ExtractData:
     # Initial the class
     def __init__(self):
+        # If this instance of the class created, import the config file
+        import config
         # Initial the variables
         self.__links = list()
         self.__driver = webdriver.Firefox(
@@ -48,17 +49,22 @@ class ExtractData:
     # Save the data in the json file
     def __save_data(self: object) -> None:
         conn = psycopg2.connect(
-            host=config.DB_HOST,
-            user=config.DB_USER,
-            password=config.DB_PASSWORD,
-            dbname=config.DB_NAME
+            host=self.config.DB_HOST,
+            user=self.config.DB_USER,
+            password=self.config.DB_PASSWORD,
+            dbname=self.config.DB_NAME
         )
         curs = conn.cursor()
         for data in self.__data_list:
             try:
                 sql = f"""
                 INSERT INTO information(title, description, phone, tags)
-                VALUES ('{data['postTitle']}', '{data['posterDiscription']}', '{data['posterPhone']}', '{data['postTags']}')
+                VALUES (
+                '{data['postTitle']}',
+                '{data['posterDiscription']}',
+                '{data['posterPhone']}',
+                '{data['postTags']}'
+                )
                 """
                 curs.execute(sql)
             except Exception:

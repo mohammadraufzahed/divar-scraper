@@ -17,7 +17,7 @@ def init() -> None:
     # Try to connect to the database
     try:
         conn = psycopg2.connect(
-            host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
+            host=DB_HOST, user=DB_USER, password=DB_PASSWORD, dbname="postgres")
         conn.autocommit = True
     # If an exception is thrown print the error
     except Exception:
