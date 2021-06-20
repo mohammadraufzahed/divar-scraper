@@ -11,7 +11,7 @@ Unidecode = "==1.2.0"
 psycopg2-binary = "==2.8.6"
 autopep8 = "*"
 pylint = "*"
-stdiomask = "*"
+stdiomask = "0.0.6"
 
 [dev-packages]
 
