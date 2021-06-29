@@ -12,10 +12,13 @@ class ExtractData:
     def __init__(self):
         # If this instance of the class created, import the config file
         import config
+        self.DB_HOST = config.DB_HOST
+        self.DB_NAME = config.DB_NAME
+        self.DB_USER = config.DB_USER
+        self.DB_PASSWORD = config.DB_PASSWORD
         # Initial the variables
         self.__links = list()
-        self.__driver = webdriver.Firefox(
-            executable_path='C:\\webdrivers\\geckodriver')
+        self.__driver = webdriver.Firefox()
         self.__counter = 0
         self.__data_list = list()
         # Extract the links
@@ -49,26 +52,24 @@ class ExtractData:
     # Save the data in the json file
     def __save_data(self: object) -> None:
         conn = psycopg2.connect(
-            host=self.config.DB_HOST,
-            user=self.config.DB_USER,
-            password=self.config.DB_PASSWORD,
-            dbname=self.config.DB_NAME
+            host=self.DB_HOST,
+            user=self.DB_USER,
+            password=self.DB_PASSWORD,
+            dbname=self.DB_NAME
         )
         curs = conn.cursor()
         for data in self.__data_list:
-            try:
-                sql = f"""
-                INSERT INTO information(title, description, phone, tags)
-                VALUES (
-                '{data['postTitle']}',
-                '{data['posterDiscription']}',
-                '{data['posterPhone']}',
-                '{data['postTags']}'
-                )
-                """
-                curs.execute(sql)
-            except Exception:
-                pass
+
+            sql = f"""
+            INSERT INTO information(title, description, phone, tags)
+            VALUES (
+            '{data['postTitle']}',
+            '{data['posterDiscription']}',
+            '{data['posterPhone']}',
+            '{data['postTags']}'
+            )
+            """
+            curs.execute(sql)
 
         conn.commit()
         curs.close()

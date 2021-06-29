@@ -7,8 +7,7 @@ from url_normalize import url_normalize
 class GetPosterLink:
     def __init__(self, timeout):
         # Initial the browser
-        self.__driver = webdriver.Firefox(
-            executable_path='C:\\webdrivers\\geckodriver')
+        self.__driver = webdriver.Firefox()
         self.__category_link = input("Input the category link: ")
         self.__driver.get(self.__category_link)
         #  Initial the list of links
