@@ -14,7 +14,8 @@ def savePhoneNumbers():
     )
     curs = conn.cursor()
 
-    curs.execute("SELECT phone FROM information WHERE phone ~ '^\d+$'")
+    curs.execute(
+        "SELECT DISTINCT phone FROM information WHERE phone ~ '^\d+$'")
     phoneNumbresDB = curs.fetchall()
     phoneNumbres = list()
     for i in phoneNumbresDB:
