@@ -2,6 +2,7 @@ import argparse
 from init import init
 from classes.getPosterLink import GetPosterLink
 from classes.extractData import ExtractData
+from classes.savePhoneNumbers import savePhoneNumbers
 
 if __name__ == "__main__":
     # Initial the arguments
@@ -10,6 +11,8 @@ if __name__ == "__main__":
                           default=False, help='Initial the required files and database')
     arg_pars.add_argument("--start", type=bool,
                           default=False, help='start the scraper')
+    arg_pars.add_argument("--saveNumbers", type=bool, default=False,
+                          help="Save the unique and valid phone numbers from database")
     argpars = arg_pars.parse_args()
     if argpars.init:
         init()
@@ -22,5 +25,7 @@ if __name__ == "__main__":
         get_numbers = ExtractData()
         # Start the phone number scraper
         get_numbers.extract_data()
+    elif argpars.saveNumbers:
+        savePhoneNumbers()
     else:
         arg_pars.print_help()

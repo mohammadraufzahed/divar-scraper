@@ -2,6 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/gitbook,visualstudiocode,visualstudio,sublimetext,python,pycharm,linux,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=gitbook,visualstudiocode,visualstudio,sublimetext,python,pycharm,linux,windows,macos
 
+numbers.txt
 config.py
 ### GitBook ###
 # Node rules:
