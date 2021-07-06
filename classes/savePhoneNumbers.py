@@ -25,7 +25,7 @@ def savePhoneNumbers():
     with open("numbers.txt", "w+", encoding="utf8") as numbersFile:
         numbersFile.flush()
         for number in phoneNumbres:
-            numbersFile.write(f"{str(number)}\n")
+            numbersFile.write(f"TelNumber({counter})\t{str(number)}\n")
             counter += 1
         numbersFile.close()
         print(f"{counter} phone number saved in the numbers.txt")

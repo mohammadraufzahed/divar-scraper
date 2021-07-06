@@ -115,6 +115,13 @@ class ExtractData:
             # select discription
             discription = self.__driver.find_element_by_css_selector(
                 'p.kt-description-row__text').text
+            # Delete the escape characters
+            discription = discription.translate(
+                {ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"})
+            discription = discription.translate(
+                {ord(c): " " for c in "'"})
+            discription = discription.translate(
+                {ord(c): " " for c in '"'})
             # Select the tag Box
             tags = list()
             tags_box = self.__driver.find_element_by_css_selector(
@@ -157,6 +164,13 @@ class ExtractData:
             # select discription
             discription = self.__driver.find_element_by_css_selector(
                 'p.kt-description-row__text').text
+            # Delete the escape characters
+            discription = discription.translate(
+                {ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"})
+            discription = discription.translate(
+                {ord(c): " " for c in "'"})
+            discription = discription.translate(
+                {ord(c): " " for c in '"'})
             # Select the tag Box
             tags = list()
             tags_box = self.__driver.find_element_by_css_selector(
