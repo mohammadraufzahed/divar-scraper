@@ -44,6 +44,8 @@ class GetPosterLink:
                 if link not in self.__links:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
+            if(len(self.__links) > 50):
+                while_work = False
             # Scroll the page
             self.__scrollPage(scroll_height)
            # Increase the scroll_height variable
