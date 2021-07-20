@@ -1,3 +1,0 @@
-TelNumber(0)	09122500443
-TelNumber(1)	09357336505
-TelNumber(2)	09915066679

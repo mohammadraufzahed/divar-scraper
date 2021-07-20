@@ -44,7 +44,7 @@ class GetPosterLink:
                 if link not in self.__links:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
-            if(len(self.__links) > 50):
+            if(len(self.__links) > 100):
                 while_work = False
             # Scroll the page
             self.__scrollPage(scroll_height)
@@ -60,7 +60,7 @@ class GetPosterLink:
         self.__driver.quit()
 
     # Save the links in file
-    def __save_links(self: object):
+    def __save_links(self):
         # Open the links.json file
         with open('links.json', 'w+', encoding='utf8') as f:
             # Clean it
@@ -70,6 +70,6 @@ class GetPosterLink:
         print("Links saved on links.json")
 
     # Scroll the page
-    def __scrollPage(self: object, scroll_height: int):
+    def __scrollPage(self, scroll_height: float):
         self.__driver.execute_script(
             "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}"+");")
