@@ -5,6 +5,8 @@ from unidecode import unidecode
 import json
 from colorama import Fore
 import psycopg2
+from tqdm import tqdm
+
 
 
 class ExtractData:
@@ -38,7 +40,7 @@ class ExtractData:
 
     def extract_data(self):
         # Iterate over the links list
-        for link in self.__links:
+        for link in tqdm(self.__links):
             # If it was the first link try to login to the website
             if self.__counter == 0:
                 # First poster

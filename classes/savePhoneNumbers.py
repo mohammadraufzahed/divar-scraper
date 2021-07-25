@@ -5,7 +5,7 @@ import psycopg2
 from persiantools.jdatetime import JalaliDate
 from datetime import datetime
 import random
-
+from tqdm import tqdm
 
 def savePhoneNumbers():
     import config
@@ -40,12 +40,12 @@ def savePhoneNumbers():
     del rand_num
     with open(f"output//{file_name}", "w+", encoding="utf8") as numbersFile:
         numbersFile.flush()
-        for number in phoneNumbres:
+        for number in tqdm(phoneNumbres):
             numbersFile.write(
                 f"+98{str(number)},این یک پیام تستی است لطفا دقیق بررسی نمایید\n")
             counter += 1
         numbersFile.close()
-        print(f"{counter} phone number saved in the numbers.txt")
+        print(f"\n{counter} phone number saved in the {file_name} in the output folder")
     while True:
         delete_reocrds = input(
             "Do you want to delete all of the database records? (yes/no)")

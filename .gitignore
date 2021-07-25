@@ -4,6 +4,7 @@
 
 numbers.txt
 config.py
+output/**.txt
 ### GitBook ###
 # Node rules:
 **/.idea/**
