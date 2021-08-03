@@ -16,6 +16,7 @@ class GetPosterLink:
         self.__timeout = timeout
 
     def scrap_data(self):
+        posters_max_length = int(input("Input the max length of posters you want to scrap: "))
         # Store the pause time
         scroll_pause_time = self.__timeout
         # Select the posters box
@@ -44,7 +45,7 @@ class GetPosterLink:
                 if link not in self.__links:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
-            if(len(self.__links) > 100):
+            if(len(self.__links) > posters_max_length):
                 while_work = False
             # Scroll the page
             self.__scrollPage(scroll_height)
