@@ -1,12 +1,13 @@
-from selenium.common.exceptions import NoSuchElementException
-from selenium import webdriver
-from time import sleep
-from unidecode import unidecode
 import json
-from colorama import Fore
-import psycopg2
-from tqdm import tqdm
+from time import sleep
 
+import psycopg2
+from colorama import Fore
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.firefox.options import Options
+from tqdm import tqdm
+from unidecode import unidecode
 
 
 class ExtractData:
@@ -20,6 +21,9 @@ class ExtractData:
         self.DB_PASSWORD = config.DB_PASSWORD
         # Initial the variables
         self.__links = list()
+        # Firefox Options
+        options = Options()
+        options.headless = True
         self.__driver = webdriver.Firefox()
         self.__counter = 0
         self.__data_list = list()
@@ -61,7 +65,6 @@ class ExtractData:
         )
         curs = conn.cursor()
         for data in self.__data_list:
-
             sql = f"""
             INSERT INTO information(title, description, phone, tags)
             VALUES (

@@ -1,13 +1,18 @@
-from selenium import webdriver
-from time import sleep
 import json
+from time import sleep
+
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from url_normalize import url_normalize
 
 
 class GetPosterLink:
     def __init__(self, timeout):
+        # Firefox Options
+        options = Options()
+        options.headless = True
         # Initial the browser
-        self.__driver = webdriver.Firefox()
+        self.__driver = webdriver.Firefox(options=options)
         self.__category_link = input("Input the category link: ")
         self.__driver.get(self.__category_link)
         #  Initial the list of links
@@ -45,11 +50,11 @@ class GetPosterLink:
                 if link not in self.__links:
                     # If it doesn't exist, append it to the list
                     self.__links.append(link)
-            if(len(self.__links) > posters_max_length):
+            if (len(self.__links) > posters_max_length):
                 while_work = False
             # Scroll the page
             self.__scrollPage(scroll_height)
-           # Increase the scroll_height variable
+            # Increase the scroll_height variable
             scroll_height += 3104.5
             # Make the app goes to sleep
             sleep(scroll_pause_time)
@@ -73,4 +78,4 @@ class GetPosterLink:
     # Scroll the page
     def __scrollPage(self, scroll_height: float):
         self.__driver.execute_script(
-            "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}"+");")
+            "window.scrollTo(" + "{" + f'top:{scroll_height}, left:0, behavior: "smooth"' + "}" + ");")

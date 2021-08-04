@@ -1,4 +1,5 @@
 import sys
+
 import psycopg2
 from stdiomask import getpass
 

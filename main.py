@@ -1,8 +1,9 @@
 import argparse
-from init import init
-from classes.getPosterLink import GetPosterLink
+
 from classes.extractData import ExtractData
+from classes.getPosterLink import GetPosterLink
 from classes.savePhoneNumbers import savePhoneNumbers
+from init import init
 
 if __name__ == "__main__":
     # Initial the arguments

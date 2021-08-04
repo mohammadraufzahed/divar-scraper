@@ -1,8 +1,13 @@
 # divar-scraper
+
 Divar scraper is a simple web scraper to extract the customer's phone number and poster information from the divar.
+
 # About
+
 This scraper helps us to create a database of the divar users phone number and posters
+
 # Requirements
+
 - Python: 3.9
 - selenium: 3.141.0
 - url-normalize: 1.4.3
@@ -12,6 +17,7 @@ This scraper helps us to create a database of the divar users phone number and p
 - autopep8: latest
 - pylint: latest
 - stdiomask: 0.0.6
+
 ## Setup
 
 First, we must install the pipenv to manage our packages:
@@ -41,7 +47,9 @@ Database Username: <Your Postgres username>
 Database Password: <Your Postgres password>
 Database Name: <Your Postgres database name>
 ```
+
 # Usage
+
 ```shell
 $ python main.py
 usage: main.py [-h] [--init INIT] [--start START]

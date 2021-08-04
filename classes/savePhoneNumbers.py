@@ -1,11 +1,13 @@
 """
 Select the unique and valid phone numbers and save them in the text file
 """
+import random
+from datetime import datetime
+
 import psycopg2
 from persiantools.jdatetime import JalaliDate
-from datetime import datetime
-import random
 from tqdm import tqdm
+
 
 def savePhoneNumbers():
     import config
