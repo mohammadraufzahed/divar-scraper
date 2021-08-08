@@ -24,7 +24,7 @@ class ExtractData:
         # Firefox Options
         options = Options()
         options.headless = True
-        self.__driver = webdriver.Firefox()
+        self.__driver = webdriver.Firefox(options=options)
         self.__counter = 0
         self.__data_list = list()
         # Extract the links
