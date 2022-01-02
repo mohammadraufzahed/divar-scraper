@@ -1,5 +1,0 @@
-selenium==3.141.0
-url-normalize==1.4.3
-unidecode==1.2.0
-colorama==0.4.4
-

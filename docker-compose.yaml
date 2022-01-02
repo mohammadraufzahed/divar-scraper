@@ -1,0 +1,24 @@
+services:
+  # postgres database
+  db:
+    image: postgres
+    networks:
+      - database_connect
+    environment:
+      POSTGRES_USER: divar_scraper
+      POSTGRES_PASSWORD: divar_scraper
+      POSTGRES_DB: divar_scraper
+    ports:
+      - '8080:5432'
+    restart: always
+  divar_scraper:
+    depends_on:
+        - db
+    build: src
+    image: divar_scraper
+    networks:
+      - apps
+    restart: always
+networks:
+  database_connect:
+  apps:
